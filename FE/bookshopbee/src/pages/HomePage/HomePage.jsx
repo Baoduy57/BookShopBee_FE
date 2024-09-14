@@ -5,6 +5,7 @@ import SliderComponent from "../../component/SliderComponent/SliderComponent";
 import slider1 from "../../assets/images/slider1.jpg";
 import slider2 from "../../assets/images/slider2.jpg";
 import slider3 from "../../assets/images/slider3.jpg";
+import CardComponent from "../../component/CardComponent/CardComponent";
 const HomePage = () => {
   const arr = [
     "Sách Tình cảm",
@@ -23,11 +24,26 @@ const HomePage = () => {
       </div>
       <div
         id="container"
-        style={{ backgroundColor: "#efefef", padding: "0 120px" }}
+        style={{
+          backgroundColor: "#efefef",
+          padding: "0 120px",
+          height: "1000px",
+        }}
       >
         <SliderComponent
           arrImages={[slider1, slider2, slider3]}
         ></SliderComponent>
+
+        <div
+          style={{
+            marginTop: "25px",
+            display: "flex",
+            alignItems: "center",
+            gap: "20px",
+          }}
+        >
+          <CardComponent></CardComponent>
+        </div>
       </div>
       HomePage
     </>
