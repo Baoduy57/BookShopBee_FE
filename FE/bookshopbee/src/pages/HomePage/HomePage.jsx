@@ -6,6 +6,7 @@ import slider1 from "../../assets/images/slider1.jpg";
 import slider2 from "../../assets/images/slider2.jpg";
 import slider3 from "../../assets/images/slider3.jpg";
 import CardComponent from "../../component/CardComponent/CardComponent";
+import NavbarComponent from "../../component/NavbarComponent/NavbarComponent";
 const HomePage = () => {
   const arr = [
     "Sách Tình cảm",
@@ -27,7 +28,7 @@ const HomePage = () => {
         style={{
           backgroundColor: "#efefef",
           padding: "0 120px",
-          height: "1000px",
+          height: "2000px",
         }}
       >
         <SliderComponent
@@ -44,6 +45,7 @@ const HomePage = () => {
         >
           <CardComponent></CardComponent>
         </div>
+        <NavbarComponent></NavbarComponent>
       </div>
       HomePage
     </>
