@@ -7,7 +7,6 @@ import slider2 from "../../assets/images/slider2.jpg";
 import slider3 from "../../assets/images/slider3.jpg";
 import CardComponent from "../../component/CardComponent/CardComponent";
 import NavbarComponent from "../../component/NavbarComponent/NavbarComponent";
-import ButtonComponent from "../../component/ButtonComponent/ButtonComponent";
 
 const HomePage = () => {
   const arr = [
