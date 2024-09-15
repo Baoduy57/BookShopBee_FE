@@ -62,7 +62,7 @@ const NavbarComponent = () => {
         ])}
       </WrapperContent>
 
-      <WrapperContent>
+      {/* <WrapperContent>
         {renderContent("checkbox", [
           { value: "a", label: "A" },
           { value: "b", label: "B" },
@@ -80,7 +80,7 @@ const NavbarComponent = () => {
           "100.000 -> 400.000",
           "trên 500.000đ",
         ])}
-      </WrapperContent>
+      </WrapperContent> */}
     </div>
   );
 };
