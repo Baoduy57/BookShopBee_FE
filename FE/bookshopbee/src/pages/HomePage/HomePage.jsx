@@ -45,7 +45,7 @@ const HomePage = () => {
           <CardComponent></CardComponent>
           <CardComponent></CardComponent>
         </WrapperProduct>
-        {/* <NavbarComponent></NavbarComponent> */}
+        <NavbarComponent></NavbarComponent>
 
         <div
           style={{
