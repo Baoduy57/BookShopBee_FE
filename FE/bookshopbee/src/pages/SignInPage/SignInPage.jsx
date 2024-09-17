@@ -8,7 +8,11 @@ import InputForm from "../../component/InputForm/InputForm";
 import ButtonComponent from "../../component/ButtonComponent/ButtonComponent";
 import imageLogo from "../../assets/images/theme-login.jpg";
 import { Image } from "antd";
+import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
+import { useState } from "react";
+
 const SignInPage = () => {
+  const [isShowPassword, setIsShowPassword] = useState(false);
   return (
     <div
       style={{
@@ -32,7 +36,27 @@ const SignInPage = () => {
           <h1>What's up</h1>
           <p>Login or Sign in</p>
           <InputForm style={{ marginBottom: "13px" }} placeholder="duy@gmail" />
-          <InputForm placeholder="password" />
+          <div style={{ position: "relative" }}>
+            <span
+              style={{
+                zIndex: 10,
+                position: "absolute",
+                top: "4px",
+                right: "8px",
+              }}
+            >
+              {isShowPassword ? (
+                <EyeFilled></EyeFilled>
+              ) : (
+                <EyeInvisibleFilled></EyeInvisibleFilled>
+              )}
+            </span>
+
+            <InputForm
+              placeholder="password"
+              type={isShowPassword ? "text" : "password"}
+            ></InputForm>
+          </div>
           <ButtonComponent
             bordered={false}
             size={40}

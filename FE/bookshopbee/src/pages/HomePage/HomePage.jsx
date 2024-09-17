@@ -17,7 +17,7 @@ const HomePage = () => {
   ];
   return (
     <>
-      <div style={{ padding: "0 120px" }}>
+      <div style={{ width: "1270px", margin: "0 auto" }}>
         <WrapperTypeProduct>
           {arr.map((item) => {
             return <TypeProduct name={item} key={item}></TypeProduct>;
@@ -25,48 +25,54 @@ const HomePage = () => {
         </WrapperTypeProduct>
       </div>
       <div
-        id="container"
-        style={{
-          backgroundColor: "#efefef",
-          padding: "0 120px",
-          height: "2000px",
-        }}
+        className="body"
+        style={{ width: "100%", backgroundColor: "#efefef" }}
       >
-        <SliderComponent
-          arrImages={[slider1, slider2, slider3]}
-        ></SliderComponent>
-
-        <WrapperProduct>
-          <CardComponent></CardComponent>
-          <CardComponent></CardComponent>
-          <CardComponent></CardComponent>
-          <CardComponent></CardComponent>
-          <CardComponent></CardComponent>
-          <CardComponent></CardComponent>
-          <CardComponent></CardComponent>
-        </WrapperProduct>
-        <NavbarComponent></NavbarComponent>
-
         <div
+          id="container"
           style={{
-            width: "100%",
-            display: "flex",
-            justifyContent: "center",
-            marginTop: "15px",
+            backgroundColor: "#efefef",
+            margin: "0 auto",
+            height: "2000px",
+            width: "1270px",
           }}
         >
-          <WrapperButtonMore
-            textButton="Xem thêm"
-            type="outline"
-            styleButton={{
-              border: "1px solid rgb(11,116,229)",
-              color: "rgb(11,116,229)",
-              width: "240px",
-              height: "38px",
-              borderRadius: "5px",
+          <SliderComponent
+            arrImages={[slider1, slider2, slider3]}
+          ></SliderComponent>
+
+          <WrapperProduct>
+            <CardComponent></CardComponent>
+            <CardComponent></CardComponent>
+            <CardComponent></CardComponent>
+            <CardComponent></CardComponent>
+            <CardComponent></CardComponent>
+            <CardComponent></CardComponent>
+            <CardComponent></CardComponent>
+          </WrapperProduct>
+          {/* <NavbarComponent></NavbarComponent> */}
+
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "15px",
             }}
-            styleTextButton={{ fontWeight: "500" }}
-          ></WrapperButtonMore>
+          >
+            <WrapperButtonMore
+              textButton="Xem thêm"
+              type="outline"
+              styleButton={{
+                border: "1px solid rgb(11,116,229)",
+                color: "rgb(11,116,229)",
+                width: "240px",
+                height: "38px",
+                borderRadius: "5px",
+              }}
+              styleTextButton={{ fontWeight: "500" }}
+            ></WrapperButtonMore>
+          </div>
         </div>
       </div>
       HomePage
