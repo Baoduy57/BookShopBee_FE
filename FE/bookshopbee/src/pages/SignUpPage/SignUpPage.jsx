@@ -8,8 +8,12 @@ import InputForm from "../../component/InputForm/InputForm";
 import ButtonComponent from "../../component/ButtonComponent/ButtonComponent";
 import { Image } from "antd";
 import imageLogo from "../../assets/images/theme-login.jpg";
+import { useState } from "react";
+import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
 
 const SignUpPage = () => {
+  const [isShowPassword, setShowPassword] = useState(false);
+  const [isShowConfirmPassword, setShowConfirmPassword] = useState(false);
   return (
     <div
       style={{
@@ -33,8 +37,49 @@ const SignUpPage = () => {
           <h1>What's up</h1>
           <p>Login or Sign in</p>
           <InputForm style={{ marginBottom: "13px" }} placeholder="duy@gmail" />
-          <InputForm style={{ marginBottom: "13px" }} placeholder="password" />
-          <InputForm placeholder="confirm password" />
+
+          <div style={{ position: "relative" }}>
+            <span
+              style={{
+                zIndex: 10,
+                position: "absolute",
+                top: "4px",
+                right: "8px",
+              }}
+            >
+              {isShowPassword ? (
+                <EyeFilled></EyeFilled>
+              ) : (
+                <EyeInvisibleFilled></EyeInvisibleFilled>
+              )}
+            </span>
+
+            <InputForm
+              placeholder="password"
+              style={{ marginBottom: "10px" }}
+            ></InputForm>
+          </div>
+          <div style={{ position: "relative" }}>
+            <span
+              style={{
+                zIndex: 10,
+                position: "absolute",
+                top: "4px",
+                right: "8px",
+              }}
+            >
+              {isShowConfirmPassword ? (
+                <EyeFilled></EyeFilled>
+              ) : (
+                <EyeInvisibleFilled></EyeInvisibleFilled>
+              )}
+            </span>
+
+            <InputForm
+              placeholder="confirm password"
+              style={{ marginBottom: "10px" }}
+            ></InputForm>
+          </div>
           <ButtonComponent
             bordered={false}
             size={40}

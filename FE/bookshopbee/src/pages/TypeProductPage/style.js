@@ -4,8 +4,7 @@ import styled from "styled-components";
 export const WrapperProduct = styled.div`
   margin-top: 25px;
   display: flex;
-  justify-content: center;
-  gap: 20px;
+  gap: 15px;
   flex-wrap: wrap;
 `;
 
@@ -16,4 +15,5 @@ export const WrapperNavbar = styled(Col)`
   border-radius: 6px;
   margin-top: 25px;
   height: fit-content;
+  width: 200px;
 `;
