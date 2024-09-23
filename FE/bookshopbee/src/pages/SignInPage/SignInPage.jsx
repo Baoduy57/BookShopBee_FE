@@ -10,9 +10,29 @@ import imageLogo from "../../assets/images/theme-login.jpg";
 import { Image } from "antd";
 import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SignInPage = () => {
   const [isShowPassword, setIsShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleOnchangeEmail = (value) => {
+    setEmail(value);
+  };
+
+  const handleOnchangePassword = (value) => {
+    setPassword(value);
+  };
+
+  const handleSignIn = () => {
+    console.log("Sign in", email, password);
+  };
+
+  const navigate = useNavigate();
+  const handleNavigateSignUp = () => {
+    navigate("/Sign-Up");
+  };
   return (
     <div
       style={{
@@ -35,9 +55,15 @@ const SignInPage = () => {
         <WrapperContainerLeft>
           <h1>What's up</h1>
           <p>Login or Sign in</p>
-          <InputForm style={{ marginBottom: "13px" }} placeholder="duy@gmail" />
+          <InputForm
+            style={{ marginBottom: "13px" }}
+            placeholder="duy@gmail"
+            value={email}
+            onChange={handleOnchangeEmail}
+          />
           <div style={{ position: "relative" }}>
             <span
+              onClick={() => setIsShowPassword(!isShowPassword)}
               style={{
                 zIndex: 10,
                 position: "absolute",
@@ -55,10 +81,13 @@ const SignInPage = () => {
             <InputForm
               placeholder="password"
               type={isShowPassword ? "text" : "password"}
+              value={password}
+              onChange={handleOnchangePassword}
             ></InputForm>
           </div>
           <ButtonComponent
-            bordered={false}
+            onClick={handleSignIn}
+            disabled={!email.length || !password.length}
             size={40}
             styleButton={{
               background: "rgb(225,57,69)",
@@ -79,7 +108,10 @@ const SignInPage = () => {
             <WrapperTextLight>Forgot password</WrapperTextLight>
           </p>
           <p>
-            No account ? <WrapperTextLight>Sign Up</WrapperTextLight>
+            No account ?{" "}
+            <WrapperTextLight onClick={handleNavigateSignUp}>
+              Sign Up
+            </WrapperTextLight>
           </p>
         </WrapperContainerLeft>
 

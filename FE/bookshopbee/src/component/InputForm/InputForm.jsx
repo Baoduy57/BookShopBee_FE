@@ -1,15 +1,17 @@
-import { Input } from "antd";
-import React, { useState } from "react";
+import React from "react";
 import { WrapperTextStyle } from "./style";
 
 const InputForm = (props) => {
-  const [valueInput, setValueInput] = useState("");
   const { placeholder = "Input login", ...rests } = props;
+  const handleOnchangeInput = (e) => {
+    props.onChange(e.target.value);
+  };
   return (
     <WrapperTextStyle
       placeholder={placeholder}
-      valueInput={valueInput}
+      value={props.value}
       {...rests}
+      onChange={handleOnchangeInput}
     />
   );
 };
