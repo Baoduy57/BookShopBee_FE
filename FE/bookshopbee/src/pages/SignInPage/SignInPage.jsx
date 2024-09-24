@@ -11,6 +11,9 @@ import { Image } from "antd";
 import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import * as UserService from "../../services/UserService";
+import { useMutationHooks } from "../../hooks/useMutationHook";
+import Loading from "../../component/LoadingComponent/Loading";
 
 const SignInPage = () => {
   const [isShowPassword, setIsShowPassword] = useState(false);
@@ -26,6 +29,10 @@ const SignInPage = () => {
   };
 
   const handleSignIn = () => {
+    mutation.mutate({
+      email,
+      password,
+    });
     console.log("Sign in", email, password);
   };
 
@@ -33,6 +40,12 @@ const SignInPage = () => {
   const handleNavigateSignUp = () => {
     navigate("/Sign-Up");
   };
+
+  const mutation = useMutationHooks((data) => UserService.loginUser(data));
+  console.log("mutation", mutation);
+
+  const { data, isPending } = mutation;
+
   return (
     <div
       style={{
@@ -85,30 +98,36 @@ const SignInPage = () => {
               onChange={handleOnchangePassword}
             ></InputForm>
           </div>
-          <ButtonComponent
-            onClick={handleSignIn}
-            disabled={!email.length || !password.length}
-            size={40}
-            styleButton={{
-              background: "rgb(225,57,69)",
-              height: "48px",
-              width: "100%",
-              borderRadius: "5px",
-              margin: "26px 0 10px",
-            }}
-            textButton={"Login"}
-            styleTextButton={{
-              color: "#fff",
-              fontSize: "15px",
-              fontWeight: "700",
-            }}
-          ></ButtonComponent>
+
+          {data?.status === "ERR" && (
+            <span style={{ color: "rgb(225,57,69)" }}>{data?.message}</span>
+          )}
+          <Loading isPending={isPending}>
+            <ButtonComponent
+              onClick={handleSignIn}
+              disabled={!email.length || !password.length}
+              size={40}
+              styleButton={{
+                background: "rgb(225,57,69)",
+                height: "48px",
+                width: "100%",
+                borderRadius: "5px",
+                margin: "26px 0 10px",
+              }}
+              textButton={"Login"}
+              styleTextButton={{
+                color: "#fff",
+                fontSize: "15px",
+                fontWeight: "700",
+              }}
+            ></ButtonComponent>
+          </Loading>
 
           <p>
             <WrapperTextLight>Forgot password</WrapperTextLight>
           </p>
           <p>
-            No account ?{" "}
+            No account ?
             <WrapperTextLight onClick={handleNavigateSignUp}>
               Sign Up
             </WrapperTextLight>
