@@ -11,6 +11,9 @@ import imageLogo from "../../assets/images/theme-login.jpg";
 import { useState } from "react";
 import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import * as UserService from "../../services/UserService";
+import { useMutationHooks } from "../../hooks/useMutationHook";
+import Loading from "../../component/LoadingComponent/Loading";
 
 const SignUpPage = () => {
   const [isShowPassword, setShowPassword] = useState(false);
@@ -36,8 +39,13 @@ const SignUpPage = () => {
     navigate("/Sign-In");
   };
 
+  const mutation = useMutationHooks((data) => UserService.signupUser(data));
+
+  const { data, isPending } = mutation;
+
   const handleSignUp = () => {
-    console.log("sign up", email, password, confirmPassword);
+    mutation.mutate({ email, password, confirmPassword });
+    // console.log("sign up", email, password, confirmPassword);
   };
   return (
     <div
@@ -118,26 +126,33 @@ const SignUpPage = () => {
               onChange={handleOnchangeConfirmPassword}
             ></InputForm>
           </div>
-          <ButtonComponent
-            disabled={
-              !email.length || !password.length || !confirmPassword.length
-            }
-            onClick={handleSignUp}
-            size={40}
-            styleButton={{
-              background: "rgb(225,57,69)",
-              height: "48px",
-              width: "100%",
-              borderRadius: "5px",
-              margin: "26px 0 10px",
-            }}
-            textButton={"Sign Up"}
-            styleTextButton={{
-              color: "#fff",
-              fontSize: "15px",
-              fontWeight: "700",
-            }}
-          ></ButtonComponent>
+
+          {data?.status === "ERR" && (
+            <span style={{ color: "rgb(225, 57, 69)" }}>{data?.message}</span>
+          )}
+          <Loading isPending={isPending}>
+            <ButtonComponent
+              disabled={
+                !email.length || !password.length || !confirmPassword.length
+              }
+              onClick={handleSignUp}
+              size={40}
+              styleButton={{
+                background: "rgb(225,57,69)",
+                height: "48px",
+                width: "100%",
+                borderRadius: "5px",
+                margin: "26px 0 10px",
+              }}
+              textButton={"Sign Up"}
+              styleTextButton={{
+                color: "#fff",
+                fontSize: "15px",
+                fontWeight: "700",
+              }}
+            ></ButtonComponent>
+          </Loading>
+
           <p>
             You have an account ?
             <WrapperTextLight onClick={handleNavigateSignIn}>
