@@ -54,7 +54,7 @@ const SignInPage = () => {
   useEffect(() => {
     if (isSuccess) {
       navigate("/");
-      localStorage.setItem("access_token", data?.access_token); // Lưu access token vào localStorage
+      localStorage.setItem("access_token", JSON.stringify(data?.access_token)); // Lưu access token vào localStorage
       // console.log("data", data);
       if (data?.access_token) {
         const decoded = jwtDecode(data?.access_token); // Giải mã token bằng jwtDecode
