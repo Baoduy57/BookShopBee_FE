@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   WrapperContainerLeft,
   WrapperContainerRight,
@@ -14,11 +14,16 @@ import { useNavigate } from "react-router-dom";
 import * as UserService from "../../services/UserService";
 import { useMutationHooks } from "../../hooks/useMutationHook";
 import Loading from "../../component/LoadingComponent/Loading";
+// import * as message from "../../component/Message/Message";
+import { jwtDecode } from "jwt-decode";
+import { useDispatch } from "react-redux";
+import { updateUser } from "../../redux/slides/userSlide";
 
 const SignInPage = () => {
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
 
   const handleOnchangeEmail = (value) => {
     setEmail(value);
@@ -33,7 +38,7 @@ const SignInPage = () => {
       email,
       password,
     });
-    console.log("Sign in", email, password);
+    // console.log("Sign in", email, password);
   };
 
   const navigate = useNavigate();
@@ -44,8 +49,29 @@ const SignInPage = () => {
   const mutation = useMutationHooks((data) => UserService.loginUser(data));
   console.log("mutation", mutation);
 
-  const { data, isPending } = mutation;
+  const { data, isPending, isSuccess } = mutation;
 
+  useEffect(() => {
+    if (isSuccess) {
+      navigate("/");
+      localStorage.setItem("access_token", data?.access_token); // Lưu access token vào localStorage
+      // console.log("data", data);
+      if (data?.access_token) {
+        const decoded = jwtDecode(data?.access_token); // Giải mã token bằng jwtDecode
+        console.log("decoded", decoded);
+
+        if (decoded?.id) {
+          handleGetDetailsUser(decoded?.id, data?.access_token);
+        }
+      }
+    }
+  }, [isSuccess, data?.access_token, navigate]); // Đảm bảo tất cả phụ thuộc liên quan đều có mặt
+
+  const handleGetDetailsUser = async (id, token) => {
+    const res = await UserService.getDetailsUser(id, token);
+    dispatch(updateUser({ ...res?.data, access_token: token }));
+    console.log("res", res);
+  };
   return (
     <div
       style={{

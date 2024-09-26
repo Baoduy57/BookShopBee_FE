@@ -16,3 +16,15 @@ export const signupUser = async (data) => {
   );
   return res.data;
 };
+
+export const getDetailsUser = async (id, access_token) => {
+  const res = await axios.get(
+    `${process.env.REACT_APP_API_TEST}/user/Get-Details/${id}`,
+    {
+      headers: {
+        token: `Bearer ${access_token}`,
+      },
+    }
+  );
+  return res.data;
+};
